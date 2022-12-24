@@ -1,0 +1,4 @@
+Create a connection using ./main as a client as a server to have an udp connection. See ./main -h
+Run ./attacker with correct info to inject one send packet.
+Note that attack was not successful. 
+

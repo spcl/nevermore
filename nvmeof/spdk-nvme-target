@@ -1,0 +1,32 @@
+
+For having SPDK nvme target
+
+#see https://spdk.io/doc/nvmf.html
+
+Important to `sudo modprobe nvme_rdma`
+
+The test does not require a real nvme device. The device can be emulated with "bdev_malloc_create".
+
+On Target:
+sudo scripts/setup.sh
+
+sudo build/bin/nvmf_tgt &
+sudo scripts/rpc.py nvmf_create_transport -t RDMA -u 8192 -m 4 -c 4192
+
+sudo scripts/rpc.py bdev_malloc_create -b Malloc0 512 512 //this is for fake NVME device.
+// othersie you can attach your real nvme device
+
+sudo ./scripts/rpc.py bdev_nvme_attach_controller -b Malloc0 -t pcie -a 0000:02:00.0
+sudo scripts/rpc.py nvmf_create_subsystem nqn.2016-06.io.spdk:cnode1 -a -s SPDK00000000000001 -d SPDK_Controller1
+sudo scripts/rpc.py nvmf_subsystem_add_ns nqn.2016-06.io.spdk:cnode1 Malloc0n1
+sudo scripts/rpc.py nvmf_subsystem_add_listener nqn.2016-06.io.spdk:cnode1 -t rdma -a 192.168.1.21 -s 4420
+
+
+ 
+On client 
+sudo modprobe nvme_rdma
+sudo ./build/examples/identify -r 'trtype:rdma adrfam:IPv4 traddr:192.168.1.20 trsvcid:4420 subnqn:nqn.2016-06.io.spdk:cnode1' 
+
+ 
+
+

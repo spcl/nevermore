@@ -1,0 +1,4 @@
+Run tcpdump to sniff packets.
+Run the server and the client to create a QP connection. 
+Run the attacker with QPN and IDs from the RDMACM "ready to use" packet. 
+

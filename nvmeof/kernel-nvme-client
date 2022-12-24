@@ -1,0 +1,27 @@
+####################################
+# from https://community.mellanox.com/s/article/howto-configure-nvme-over-fabrics
+nvmet usage:
+
+modprobe nvmet
+modprobe nvmet-rdma
+
+mkdir /sys/kernel/config/nvmet/subsystems/nqn.2016-06.io.spdk:cnode1
+cd /sys/kernel/config/nvmet/subsystems/nqn.2016-06.io.spdk:cnode1
+echo 1 > attr_allow_any_host 
+
+cd namespaces/10
+echo -n /dev/nvme0n1> device_path
+echo 1 > enable
+
+
+mkdir /sys/kernel/config/nvmet/ports/1
+cd /sys/kernel/config/nvmet/ports/1
+echo 192.168.1.21 > addr_traddr
+echo rdma > addr_trtype
+echo 4420 > addr_trsvcid
+echo ipv4 > addr_adrfam
+
+ln -s /sys/kernel/config/nvmet/subsystems/nqn.2016-06.io.spdk:cnode1 /sys/kernel/config/nvmet/ports/1/subsystems/nqn.2016-06.io.spdk:cnode1
+dmesg | grep "enabling port"
+
+

@@ -1,0 +1,12 @@
+to change LID of local device
+ibportstate -D 0 1 lid 0x3 arm -d && ibv_devinfo -v
+ibportstate -D 0 1 lid 0x3 active -d && ibv_devinfo -v
+sudo ibportstate -D 0 1 smlid 0x1 lid 0x4 active -d  && ibv_devinfo
+
+
+
+Get local info with sudo example:
+
+GID[  0]:		fe80:0000:0000:0000:0002:c903:0034:b281
+sudo ibportstate -G 0x2c9030034b281 0 query
+

@@ -1,0 +1,2 @@
+# the attack was applied to the following test:
+ib_write_bw 192.168.1.10 -d mlx5_0   --CPU-freq --run_infinitely  -s 1024 -x 3

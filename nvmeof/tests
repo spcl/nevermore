@@ -1,0 +1,17 @@
+On client nvme IO tests:
+
+To write/read from linux:
+sudo nvme write /dev/nvme0n1 -s 0 -z 6000 -c 20
+sudo nvme read /dev/nvme0n1 -s 0 -z 6000 -c 20
+
+
+sudo nvme connect -t rdma -n nqn.2016-06.io.spdk:cnode1 -a 192.168.1.21 -i 1 -W 1 -P 1 -k 5
+sudo nvme disconnect -d nvme0
+
+
+
+use attack use attacker with example: I used wireshark to get some fields
+./attacker -d mlx5_0 -q 0x000000ac -n 14118710 -z 0xa01a8c0ffff0000 -g 4 -a 35184375730176 -r 192463
+./attacker -d mlx5_0 -q 0x000000ac -n 14118710 -z 0xa01a8c0ffff0000 -g 4
+
+ 

